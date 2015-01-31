@@ -11,14 +11,14 @@
 #
 #################################################################
 
-cat << '_EOF'
+cat << _EOF
 This script preps a Rasperry Pi to host some demo applications for a mesh node.  This should work on most any Debian
 machine, but we're focused on a Pi only because it's very portable.
 
 This script must be executed using sudo or as root.  Networking must already be configured, either via wifi or eth0.
 Eth0 may be more "wow" factor, but it really doesn't matter.  Apache will listen on all ports.
 
-'_EOF'
+_EOF
 
 read -p "Press [Enter] key to start install, or CTRL-C to exit..."
 echo "Setting up environment:"
@@ -77,7 +77,7 @@ echo "Library..."
 git clone https://github.com/BuffaloMeshDotNet/library.git
 
 cd /var/www/library
-cat > /var/www/index.html << '_EOF'
+cat > /var/www/index.html << _EOF
 <html>
 <head>
 <title>BuffaloMesh Demo Node</title>
@@ -88,4 +88,4 @@ cat > /var/www/index.html << '_EOF'
 <h1><a href="Library">Library</a></h1>
 </body>
 </html>
-'_EOF'
+_EOF
