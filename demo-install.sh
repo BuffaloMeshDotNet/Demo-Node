@@ -10,6 +10,7 @@
 # Copyright (c) 2015 by Corey Reichle.  Released under GPL 3 or later.
 #
 #################################################################
+export DEBUG=0
 
 cat << _EOF
 This script preps a Rasperry Pi to host some demo applications for a mesh node.  This should work on most any Debian
@@ -57,7 +58,7 @@ libxss1:armhf libxt6:armhf libxtst6:armhf libxv1:armhf libxxf86dga1:armhf libxxf
 lxde-icon-theme lxmenu-data lxpolkit lxrandr lxtask lxterminal menu menu-xdg midori mime-support mountall netsurf-gtk obconf omxplayer openbox \
 pciutils pcmanfm plymouth policykit-1 poppler-data python python-support python2.7 python2.7-minimal python3 python3.2 python3.2-minimal scratch \
 sgml-base shared-mime-info squeak-vm tasksel tcl8.5 tk8.5 tsconf udisks update-inetd weston wpagui x11-common x11-utils x11-xserver-utils xarchiver \
-xfonts-utils xinit xml-core xpdf xserver-xorg xserver-xorg-core idle-python3.2 idle3 ifplugd info leafpad &>/dev/null
+xfonts-utils xinit xml-core xpdf xserver-xorg xserver-xorg-core idle-python3.2 idle3 ifplugd info leafpad
 
 echo "Getting files:"
 
@@ -76,7 +77,6 @@ git clone https://github.com/BuffaloMeshDotNet/webchat.git
 echo "Library..."
 git clone https://github.com/BuffaloMeshDotNet/library.git
 
-cd /var/www/library
 cat > /var/www/index.html << _EOF
 <html>
 <head>
