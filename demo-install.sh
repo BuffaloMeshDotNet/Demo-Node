@@ -10,7 +10,6 @@
 # Copyright (c) 2015 by Corey Reichle.  Released under GPL 3 or later.
 #
 #################################################################
-export DEBUG=0
 
 cat << _EOF
 This script preps a Rasperry Pi to host some demo applications for a mesh node.  This should work on most any Debian
@@ -60,12 +59,16 @@ pciutils pcmanfm plymouth policykit-1 poppler-data python python-support python2
 sgml-base shared-mime-info squeak-vm tasksel tcl8.5 tk8.5 tsconf udisks update-inetd weston wpagui x11-common x11-utils x11-xserver-utils xarchiver \
 xfonts-utils xinit xml-core xpdf xserver-xorg xserver-xorg-core idle-python3.2 idle3 ifplugd info leafpad
 
+apt-get -y autoremove
+
+apt-get cleanall
+
 echo "Getting files:"
 
 # We need the LAMP stack, plus git-core so we can clone down all of the apps
 echo "Installing required programs via apt..."
 apt-get update
-apt-get -y install sudo apt-get install apache2 mysql-server php5 php5-mysql git-core
+apt-get -y install apache2 mysql-server php5 php5-mysql git-core
 
 cd /var/www
 
@@ -74,6 +77,8 @@ echo "Wiki copy..."
 git clone https://github.com/BuffaloMeshDotNet/website.git
 echo "Chat..."
 git clone https://github.com/BuffaloMeshDotNet/webchat.git
+touch /var/www/webchat/msg.html
+chmod ugo+rw /var/www/webchat/msg.html
 echo "Library..."
 git clone https://github.com/BuffaloMeshDotNet/library.git
 
@@ -85,7 +90,7 @@ cat > /var/www/index.html << _EOF
 <body>
 <h1><a href="website">Read-Only Wiki</a></h1>
 <h1><a href="webchat">Web Chat</a></h1>
-<h1><a href="Library">Library</a></h1>
+<h1><a href="library">Library</a></h1>
 </body>
 </html>
 _EOF
