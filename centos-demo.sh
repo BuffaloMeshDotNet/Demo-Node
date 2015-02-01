@@ -9,6 +9,9 @@
 # 01/31/2015
 # Copyright (c) 2015 by Corey Reichle.  Released under GPL 3 or later.
 #
+#	This is SOOOOOOO not tested on anything.  Maybe in a week
+#	or so I'll get to it.
+#
 #################################################################
 
 cat << _EOF
