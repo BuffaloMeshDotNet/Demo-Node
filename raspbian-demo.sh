@@ -94,3 +94,6 @@ cat > /var/www/index.html << _EOF
 </body>
 </html>
 _EOF
+
+echo "All set up!  Point the browser to the following address, or configure the Commotion apps to point here:"
+ifconfig `route | sed -n '3,$p' | grep "default" | awk '{print $8}'` | grep inet | awk '{ print $2 }' | awk -F":" '{print $2}'
