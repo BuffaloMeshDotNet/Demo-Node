@@ -9,4 +9,4 @@ You should get a set of 3 apps, and you can keep re-running the scripts safely.
 It doesn't harm anything to do so, and in fact will update the apps if there's
 new versions.
 
-./demo-setup.sh
+It takes no arguments, it just runs.
