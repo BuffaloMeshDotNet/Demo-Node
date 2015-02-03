@@ -39,7 +39,7 @@ echo "Installing required programs via apt..."
 apt-get update
 apt-get -y install apache2 mysql-server php5 php5-mysql git-core
 
-cd /var/www
+cd /var/www/html
 
 echo "Cloning in the applications..."
 echo "Wiki copy..."
@@ -51,7 +51,7 @@ chmod ugo+rw /var/www/webchat/msg.html
 echo "Library..."
 git clone https://github.com/BuffaloMeshDotNet/library.git
 
-cat > /var/www/index.html << _EOF
+cat > /var/www/html/index.html << _EOF
 <html>
 <head>
 <title>BuffaloMesh Demo Node</title>
