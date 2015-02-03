@@ -91,7 +91,7 @@ cat > /var/www/index.html << _EOF
 <title>BuffaloMesh Demo Node</title>
 </head>
 <body>
-<h1><a href="website">Read-Only Wiki</a></h1>
+<h1><a href="website/pmwiki.php">Read-Only Wiki</a></h1>
 <h1><a href="webchat">Web Chat</a></h1>
 <h1><a href="library">Library</a></h1>
 </body>
