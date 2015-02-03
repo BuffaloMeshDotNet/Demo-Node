@@ -75,6 +75,7 @@ cd /var/www
 echo "Cloning in the applications..."
 echo "Wiki copy..."
 git clone https://github.com/BuffaloMeshDotNet/website.git
+sed -i.bak -e '7d;8d' /var/www/html/website/local/config.php
 echo "Chat..."
 git clone https://github.com/BuffaloMeshDotNet/webchat.git
 touch /var/www/webchat/msg.html
@@ -88,7 +89,7 @@ cat > /var/www/index.html << _EOF
 <title>BuffaloMesh Demo Node</title>
 </head>
 <body>
-<h1><a href="website">Read-Only Wiki</a></h1>
+<h1><a href="website/pmwiki.php">Read-Only Wiki</a></h1>
 <h1><a href="webchat">Web Chat</a></h1>
 <h1><a href="library">Library</a></h1>
 </body>

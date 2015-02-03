@@ -44,6 +44,7 @@ cd /var/www/html
 echo "Cloning in the applications..."
 echo "Wiki copy..."
 git clone https://github.com/BuffaloMeshDotNet/website.git
+sed -i.bak -e '7d;8d' /var/www/html/website/local/config.php
 echo "Chat..."
 git clone https://github.com/BuffaloMeshDotNet/webchat.git
 touch /var/www/webchat/msg.html
