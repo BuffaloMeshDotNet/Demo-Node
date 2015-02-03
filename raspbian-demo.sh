@@ -2,8 +2,8 @@
 
 #################################################################
 #
-# demo-install.sh script
-#       vr 0.7
+# raspian-demo.sh script
+#       vr 0.9
 #
 # Written by Corey Reichle
 # 01/28/2015
@@ -12,11 +12,13 @@
 #################################################################
 
 cat << _EOF
-This script preps a Rasperry Pi to host some demo applications for a mesh node.  This should work on most any Debian
-machine, but we're focused on a Pi only because it's very portable.
+This script preps a Rasperry Pi to host some demo applications for a mesh node.
 
-This script must be executed using sudo or as root.  Networking must already be configured, either via wifi or eth0.
-Eth0 may be more "wow" factor, but it really doesn't matter.  Apache will listen on all ports.
+This script must be executed using sudo or as root.  eth0 is configured to act as a DHCP server, and wifi is left
+to have wpa_supplicant control it.
+
+After configuration, this needs to be connected to the WAN port of a mesh node, and the node will broadcast itself
+as an "Internet Gateway", but we're really just stealing that to act as a captive portal that works every time.
 
 _EOF
 
@@ -97,17 +99,28 @@ cat > /var/www/index.html << _EOF
 _EOF
 
 cat > /etc/dnsmasq.conf << _EOF
-interface=wlan0                                    # To get dnsmasq to listen only on wlan0.
+interface=eth0                                     # To get dnsmasq to listen only on eth0.
 dhcp-range=10.0.0.2,10.0.0.5,255.255.255.0,12h     # This sets the available range from 10.0.0.2 to 10.0.0.5
 address=/#/10.0.0.1
 _EOF
 /etc/init.d/dnsmasq restart
 
 cat > /etc/network/interfaces << _EOF
+auto lo
+auto eth0
+
+iface lo inet loopback
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+
 iface eth0 inet static
 address 10.0.0.1
 netmask 255.255.255.0
 _EOF
 
-echo "All set up!  Point the browser to the following address, or configure the Commotion apps to point here:"
-ifconfig `route | sed -n '3,$p' | grep "default" | awk '{print $8}'` | grep inet | awk '{ print $2 }' | awk -F":" '{print $2}'
+echo "All set up!  Point the browser to the following address, or configure the Commotion apps to 10.0.0.1"
+
+read -p "Press [Enter] key to reboot, or CTRL-C to drop back to the shell..."
