@@ -15,14 +15,17 @@
 #################################################################
 
 cat << _EOF
-This script preps a CentOS-based machine to host some demo applications for a mesh node. It should work on any
-CentOS based distro, but tested against CentOS 6 and 7.
+This script preps a CentOS-based machine to host some demo applications for a
+mesh node. It should work on any CentOS based distro, but tested against CentOS
+6 and 7.
 
-This script must be executed using sudo or as root.  Networking must already be configured, either via wifi or eth0.
-Eth0 may be more "wow" factor, but it really doesn't matter.  Apache will listen on all ports.
+This script must be executed using sudo or as root.  Networking must already be
+configured, either via wifi or eth0.  Eth0 may be more "wow" factor, but it
+really doesn't matter.  Apache will listen on all ports.
 
-If you already have an Apache instance set up, DO NOT RUN THIS.  It will likely clobber your web content.  You can
-do the bulk of the work by cloning in the appropriate repos:
+If you already have an Apache instance set up, DO NOT RUN THIS.  It will likely
+clobber your web content.  You can do the bulk of the work by cloning in the
+appropriate repos:
 
 cd /var/www/html
 git clone https://github.com/BuffaloMeshDotNet/website.git
