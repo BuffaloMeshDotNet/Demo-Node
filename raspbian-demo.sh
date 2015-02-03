@@ -65,10 +65,10 @@ apt-get cleanall
 
 echo "Getting files:"
 
-# We need the LAMP stack, plus git-core so we can clone down all of the apps
+# We need the LAMP stack, dnsmasq, plus git-core so we can clone down all of the apps
 echo "Installing required programs via apt..."
 apt-get update
-apt-get -y install apache2 mysql-server php5 php5-mysql git-core
+apt-get -y install apache2 mysql-server php5 php5-mysql git-core dnsmasq
 
 cd /var/www
 
@@ -82,6 +82,7 @@ chmod ugo+rw /var/www/webchat/msg.html
 echo "Library..."
 git clone https://github.com/BuffaloMeshDotNet/library.git
 
+echo "Writing out a sample index file..."
 cat > /var/www/index.html << _EOF
 <html>
 <head>
@@ -93,6 +94,19 @@ cat > /var/www/index.html << _EOF
 <h1><a href="library">Library</a></h1>
 </body>
 </html>
+_EOF
+
+cat > /etc/dnsmasq.conf << _EOF
+interface=wlan0                                    # To get dnsmasq to listen only on wlan0.
+dhcp-range=10.0.0.2,10.0.0.5,255.255.255.0,12h     # This sets the available range from 10.0.0.2 to 10.0.0.5
+address=/#/10.0.0.1
+_EOF
+/etc/init.d/dnsmasq restart
+
+cat > /etc/network/interfaces << _EOF
+iface eth0 inet static
+address 10.0.0.1
+netmask 255.255.255.0
 _EOF
 
 echo "All set up!  Point the browser to the following address, or configure the Commotion apps to point here:"
