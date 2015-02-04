@@ -125,3 +125,4 @@ _EOF
 echo "All set up!  Point the browser to the following address, or configure the Commotion apps to 10.0.0.1"
 
 read -p "Press [Enter] key to reboot, or CTRL-C to drop back to the shell..."
+reboot
