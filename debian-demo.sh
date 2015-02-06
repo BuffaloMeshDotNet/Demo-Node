@@ -55,17 +55,45 @@ chmod ugo+rw /var/www/html/webchat/msg.html
 echo "Library..."
 git clone https://github.com/BuffaloMeshDotNet/library.git
 
+echo "Writing out a sample index file..."
 cat > /var/www/html/index.html << _EOF
 <html>
-<head>
-<title>BuffaloMesh Demo Node</title>
-</head>
-<body>
-<h1><a href="website/pmwiki.php">Read-Only Wiki</a></h1>
-<h1><a href="webchat">Web Chat</a></h1>
-<h1><a href="library">Library</a></h1>
-</body>
+	<head>
+		<link rel="stylesheet" href="style.css"/>
+		<title>BuffaloMesh Demo Node</title>
+	</head>
+	<body>
+		<div class="menu"><h1><a href="website/pmwiki.php" target="#content">Read-Only Wiki</a></h1></div>
+		<div class="menu"><h1><a href="webchat" target="#content">Web Chat</a></h1></div>
+		<div class="menu"><h1><a href="library" target="#content">Library</a></h1></div>
+		<iframe name="#content" class="framebox" src="website/pmwiki.php"></iframe>
+	</body>
 </html>
+_EOF
+
+cat > /var/www/html/style.css << _EOF
+.body
+{
+	width:99%;
+}
+
+.framebox
+{
+	float:left;
+	overflow-y:scroll;
+	width: 99%;/*the outermost div is always a % of the page
+					width, even while resizing*/
+	height:85%;
+	display:inline-block;
+}
+
+.menu
+{
+	float:left;
+	width:33%;
+	height:10%;
+	text-align:center;
+}
 _EOF
 
 echo "All set up!  Point the browser to the following address, or configure the Commotion apps to point here:"
