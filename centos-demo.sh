@@ -62,7 +62,7 @@ echo "Library..."
 git clone https://github.com/BuffaloMeshDotNet/library.git
 
 echo "Writing out a sample index file..."
-cat > /var/www/html/index.html << _EOF
+cat > /var/www/index.html << _EOF
 <html>
 	<head>
 		<link rel="stylesheet" href="style.css"/>
@@ -77,7 +77,7 @@ cat > /var/www/html/index.html << _EOF
 </html>
 _EOF
 
-cat > /var/www/html/style.css << _EOF
+cat > /var/www/style.css << _EOF
 .body
 {
 	width:99%;
